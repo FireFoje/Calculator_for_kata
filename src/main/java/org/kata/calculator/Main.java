@@ -21,15 +21,10 @@ public class Main {
 
         System.out.println("Enter your expression(Arab or Rom): ");
         Scanner scanner = new Scanner(System.in);
-        input = scanner.nextLine();
+        input = scanner.nextLine().toUpperCase();
         String[] operands = input.replaceAll(" ", "").split("[*/+-]");
         String[] operators = input.replaceAll(" ", "").split("[0-9, I, II, III, IV, V, VI, VII, VIII, IX, X]+");
-        if (input.length() <= 2
-                || operators.length > 2
-                || Integer.parseInt(operands[0]) > 10
-                || Integer.parseInt(operands[1]) > 10
-                || Integer.parseInt(operands[0]) == 0
-                || Integer.parseInt(operands[1]) == 0) {
+        if (input.length() <= 2){
             throw new Exception();
         }
         for (int i = 0; i < operands.length; i++) {
@@ -66,8 +61,6 @@ public class Main {
                     break;
             }
         }
-
-
         for (int i = 0; i < input.length() + 1; i++) {
             boolean isInteger = isInteger(String.valueOf(input.charAt(0)));
             String inputMax = String.valueOf(input.charAt(operands.length));
@@ -79,11 +72,16 @@ public class Main {
                     || isInteger && isInteger(String.valueOf(input.charAt(1))) && input.charAt(operands.length + 1) == 'X'
                     || input.charAt(0) == 'I' && isInteger(inputMax)
                     || input.charAt(0) == 'V' && isInteger(inputMax)
-                    || input.charAt(0) == 'X' && isInteger(inputMax)) {
+                    || input.charAt(0) == 'X' && isInteger(inputMax)
+                    || operators.length > 2
+                    || Integer.parseInt(operands[0]) > 10
+                    || Integer.parseInt(operands[1]) > 10
+                    || Integer.parseInt(operands[0]) == 0
+                    || Integer.parseInt(operands[1]) == 0
+                    || operands.length < 2) {
                 throw new Exception();
             }
         }
-
 
         result = Integer.parseInt(operands[0]);
         for (int i = 1; i < operands.length; i++) {
@@ -104,61 +102,61 @@ public class Main {
 
 
             if (input.charAt(0) == 'I') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'I' && input.charAt(1) == 'I') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
-            } else if (input.charAt(0) == 'I' && input.charAt(1) == 'I' && input.charAt(2) == 'I') {
+            } else if (result==0) {
                 if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'I' && input.charAt(1) == 'V') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'V') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'V' && input.charAt(1) == 'I') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'V' && input.charAt(1) == 'I' && input.charAt(2) == 'I') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'V' && input.charAt(1) == 'I' && input.charAt(2) == 'I' && input.charAt(3) == 'I') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'I' && input.charAt(1) == 'X') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
                 }
             } else if (input.charAt(0) == 'X') {
-                if (Integer.parseInt(operands[0]) <= Integer.parseInt(operands[1])) {
+                if (result==0) {
                     throw new Exception();
                 } else {
                     System.out.println(romNum[result]);
@@ -169,7 +167,6 @@ public class Main {
         }
         return String.valueOf(result);
     }
-
 
     public static boolean isInteger(String str) {
         if (str == null) {
