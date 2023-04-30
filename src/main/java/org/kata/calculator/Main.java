@@ -24,7 +24,12 @@ public class Main {
         input = scanner.nextLine();
         String[] operands = input.replaceAll(" ", "").split("[*/+-]");
         String[] operators = input.replaceAll(" ", "").split("[0-9, I, II, III, IV, V, VI, VII, VIII, IX, X]+");
-        if (input.length() <= 2){
+        if (input.length() <= 2
+                || operators.length > 2
+                || Integer.parseInt(operands[0]) > 10
+                || Integer.parseInt(operands[1]) > 10
+                || Integer.parseInt(operands[0]) == 0
+                || Integer.parseInt(operands[1]) == 0) {
             throw new Exception();
         }
         for (int i = 0; i < operands.length; i++) {
@@ -61,6 +66,8 @@ public class Main {
                     break;
             }
         }
+
+
         for (int i = 0; i < input.length() + 1; i++) {
             boolean isInteger = isInteger(String.valueOf(input.charAt(0)));
             String inputMax = String.valueOf(input.charAt(operands.length));
@@ -72,16 +79,11 @@ public class Main {
                     || isInteger && isInteger(String.valueOf(input.charAt(1))) && input.charAt(operands.length + 1) == 'X'
                     || input.charAt(0) == 'I' && isInteger(inputMax)
                     || input.charAt(0) == 'V' && isInteger(inputMax)
-                    || input.charAt(0) == 'X' && isInteger(inputMax)
-                    || operators.length > 2
-                    || Integer.parseInt(operands[0]) > 10
-                    || Integer.parseInt(operands[1]) > 10
-                    || Integer.parseInt(operands[0]) == 0
-                    || Integer.parseInt(operands[1]) == 0
-                    || operands.length < 2) {
+                    || input.charAt(0) == 'X' && isInteger(inputMax)) {
                 throw new Exception();
             }
         }
+
 
         result = Integer.parseInt(operands[0]);
         for (int i = 1; i < operands.length; i++) {
@@ -167,6 +169,7 @@ public class Main {
         }
         return String.valueOf(result);
     }
+
 
     public static boolean isInteger(String str) {
         if (str == null) {
